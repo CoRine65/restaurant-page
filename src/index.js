@@ -1,15 +1,34 @@
 console.log("Hello from Webpack!");
 
-// grab the content div
+//importing from the homepage.js into here
+import homePage from "./homepage";
+import menuPage from "./menu";
+import contactPage from "./contact";
+
+// grab the main container
 const content = document.getElementById("content");
 
-//create homepage elements
-const headline = document.createElement("h2");
-headline.textContent = "Welcome the Webpack Restaurant!";
+//grab the buttons we created on the html
+const homeBtn = document.getElementById("home-btn");
+const menuBtn = document.getElementById("menu-btn");
+const contactBtn = document.getElementById("contact-btn");
 
-const descpription = document.createElement("p");
-descpription.textContent = "We server delicious food and provide a cozy atmosphere.";
+//utility function to clear and load each new page
+function loadPage(pageFunction){
+    content.innerHTML = ""; //clears previous content so it won't stack
+    pageFunction();
+}
 
-//append the content div
-content.appendChild(headline);
-content.appendChild(descpription);
+//event Listeners for tab switching
+homeBtn.addEventListener("click", () => {
+ loadPage(homePage);
+});
+menuBtn.addEventListener("click", () => {
+ loadPage(menuPage);
+});
+contactBtn.addEventListener("click", () => {
+ loadPage(contactPage);
+});
+
+//default load
+loadPage(homePage);
